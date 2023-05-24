@@ -28,6 +28,12 @@ function displayTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  icon.setAttribute("alt", response.data.condition.description);
   dateElement.innerHTML = formatDate(response.data.time * 1000);
   windElement.innerHTML = Math.round(response.data.wind.speed);
   humidityElement.innerHTML = response.data.temperature.humidity;
@@ -36,6 +42,6 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
 }
 let apiKey = "bd79ao40tde3dec118ca46bc3e6dd55f";
-let city = "London";
+let city = "Cartagena";
 let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayTemperature);
