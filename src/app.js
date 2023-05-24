@@ -41,7 +41,16 @@ function displayTemperature(response) {
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
 }
-let apiKey = "bd79ao40tde3dec118ca46bc3e6dd55f";
-let city = "Cartagena";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-axios.get(apiUrl).then(displayTemperature);
+function search(city) {
+  let apiKey = "bd79ao40tde3dec118ca46bc3e6dd55f";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
